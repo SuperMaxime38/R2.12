@@ -1,0 +1,504 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CODE CSS DU MENU NAV DE COTE*/
+ /* The side navigation menu */
+ .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .navbutton {
+    margin-right: 35%;
+}
+
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 10px 20px 20px 20px;
+    /*margin-left: 10%;*/
+
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+/* Add a black background color to the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topnav-left{
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 20px 24px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Style the "active" element to highlight the current page */
+  .topnav a.active {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  /* Style the search box inside the navigation bar */
+  .topnav input[type=text] {
+    float: right;
+    padding: 10px;
+    border: none;
+    margin-right: 16px;
+    width: 300px;
+    font-size: 17px;
+  }
+  
+  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+  @media screen and (max-width: 600px) {
+    .topnav a, .topnav input[type=text] {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .topnav input[type=text] {
+      border: 1px solid #ccc;
+    }
+  }
+
+/*2nd Side Nav*/
+.sidenav2 {
+  display: none;
+  height: 100%;
+  width: 14%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+.sidenav2 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav2 a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav2 .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/*Other*/
+
+a {
+    cursor: pointer;
+}
+
+h1 {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content table {
+  
+  border-spacing: 30px;
+  width: 100%;
+}
+
+h3 {
+  margin-top: 0px;
+  margin-bottom: -15px;
+}
+
+.datas {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-spacing: 0px;
+}
+
+video {
+  width: 100%;
+}
+
+.minia {
+  /*padding: 20px 8px 20px 8px;*/
+  width: 17%
+}
+
+.video {
+  width: 10%;
+}
+
+.datas p {
+  margin-right: 10px;
+  margin-left: 3px;
+}
+
+.video-info{
+  background-color: grey;
+}
+
+.videopage {
+  border: 1px solid red;
+  width: 88%;
+  margin-left: 14%; /* Même taille que la nav bar pr overlap*/
+  margin-top: 20px;
+}
+
+.videopage td {
+  border: 1px solid blue;
+}
+
+.videopage td.main {
+  border: 1px solid green;
+  width: 65%;
+  padding: auto;
+}
+
+.video {
+  width: 100%;
+}
+
+.autresvideos {
+  border: 1px solid yellow;
+  width: 96.5%;
+  height: 1140px;
+  overflow-y: scroll;
+  scrollbar-color:  rgb(72, 72, 72) rgb(190, 190, 190);
+  scrollbar-width: thin;
+}
+
+.autresvideos h2 {
+  text-align: center;
+}
+
+.autresvideos-liste {
+  display: flex;
+  justify-content: left;
+  border: 1px solid red;
+}
+
+.autresvideos p {
+  width: 100%;
+}
+.autresvideos p.desc {
+  width: 100%;
+}
+
+.autresvideos div {
+  margin-bottom: 10px;
+  width: 99%;
+}
+
+.autresvideos-liste button {
+  width: 100%;
+  height: auto;
+  text-align: left;
+}
+
+.autresvideos-liste div {
+  width: 55%;
+}
+
+/* CODE CSS DU LOGIN SCREEN (watch out a pas tt casser plz) */
+/* Popup container - can be anything you want */
+.popup {
+  height: 0;
+  width: 30%;
+  position: fixed;
+  z-index: 1;
+  top: 200px;
+  left: 35%;
+  right: 35%;
+  background-color: #cbcbcb;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 0px;
+  display:none;
+}
+
+/* mon css MAXIME NE TOUCHE RIEN C'EST LE BAZAR !! */
+
+.popup:hover {
+  box-shadow: 0 0 15px black;
+  background-color: #dadada;
+}
+
+div.divclose {
+  float: right;
+  margin-top: -20px;
+  margin-right: 6px;
+}
+
+div.logdiv {
+  margin-top: 30px;
+  text-align: center;
+}
+.popup form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  margin-left: 45px;
+}
+
+.popup form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form div.field {
+  border: 2px solid black;
+  background-color: rgb(216, 210, 210);
+  margin-bottom: 30px;
+  padding: 15px;
+}
+
+form div input {
+  margin: 10px;
+  width: 95%;
+  height: 50px;
+  display: block;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+.divclose a {
+  text-decoration: none;
+  color: black;
+  font-size: 75px;
+}
+
+.likesButton {
+  align-items: center;
+  display: flex;
+  justify-content: right;
+  text-align: right;
+  width: 5%;
+}
+
+/* mon css MAXIME NE TOUCHE RIEN C'EST LE BAZAR !! */
+
+.popupComments {
+  height: 0;
+  width: 100%;
+  z-index: 1;
+  top: 80%;
+  left: 35%;
+  right: 35%;
+  background-color: #cbcbcb;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+/* comment zone */
+
+.comments form label, textarea {
+  letter-spacing: 1px;
+}
+
+.comments form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  margin-left: 45px;
+}
+
+.changePassword {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 45px;
+}
+
+.comments div table {
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  display : flex;
+  justify-content: center;
+  
+  padding-top: 0;
+}
+
+.scroller{
+  width: 90%;
+  height: 70%;
+  overflow-y: scroll;
+  scrollbar-color: rgb(0, 0, 0) rgb(255, 255, 255);
+  scrollbar-width: thin;
+}
+
+.comments div table tr td {
+  border: 1px solid rgb(160 160 160);
+  padding: 3% 100px;
+}
+
+.history table {
+  width: 60%;
+}
+
+.myVideos {
+  display: flex;
+  align-items: center;
+}
+.upload {
+  width: 60%;
+  background-color: #f5f5f5;
+  position: fixed;
+  right: 1%;
+  top: 22%;
+  padding-top: 1%;
+  padding-bottom: 10%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.upload div form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload div form input {
+  margin: 10px;
+}
+
+.upload div form textarea {
+  margin: 10px;
+}
+
+.uploadVid form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.manageVideo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+}
+
+.manageVideo div div{
+  border: 4px solid grey;
+  background-color: #fdffeb;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.manageVideo .fat {
+  font-size: 24px;
+}
+.manageVideo .fat:hover {
+  box-shadow: 0 0 15px rgb(61, 61, 61);
+  background-color: #c8ffc6;
+  border-radius: 5px;
+  transform: scale(1.05);
+  transition: all 0.1s ease-in-out;
+  border: 1px solid green;
+}
+
+.danger {
+  font-size: 22px;
+  background-color: #ffc6c6;
+  border-radius: 5px;
+}
+.danger:hover {
+  box-shadow: 0 0 15px rgb(61, 61, 61);
+  background-color: #b32a2a;
+  border-radius: 5px;
+  transform: scale(1.05);
+  transition: all 0.1s ease-in-out;
+  border: 1px solid rgb(80, 0, 0)
+}
