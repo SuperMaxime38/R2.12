@@ -9,6 +9,21 @@
 	</head>
 	<body>
 		<nav>
+			<div>
+				<img src="" alt="logo">
+				<h1>Thron Express</h1>
+			</div>
+			<div>
+				<a href="">Find a Thron</a>
+				<a href="">Become a Host</a>
+			</div>
+			<div>
+				{% if isLogged %}
+				<img src="">
+				{% else %}
+				<a href="">Login | Sign up</a>
+				{% endif %}
+			</div>
 		</nav>
 		{% block contenu0 %}{% endblock %}
 		<footer>
