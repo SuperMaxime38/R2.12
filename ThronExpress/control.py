@@ -13,3 +13,33 @@ def index():
         isLogged = True
 
     return render_template('index.html', isLogged = isLogged)
+
+@app.route('/search')
+def search():
+    # TODO
+    return render_template('index.html')
+
+@app.route('/login')
+def login():
+    # TODO
+    return render_template('index.html')
+
+@app.route('/signup')
+def signup():
+    # TODO
+    return render_template('index.html')
+
+@app.route('/account')
+def account():
+    # TODO
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    # TODO
+    return render_template('index.html')
+
+@app.route('/subscribtions')
+def subscribtions():
+    # TODO
+    return render_template('index.html')
