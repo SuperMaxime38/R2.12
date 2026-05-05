@@ -3,7 +3,35 @@
 
 {% block title %}Home{% endblock %}
 {% block contenu0 %}
+<section> <!-- Hero section-->
+<h2>Hero section here</h2>
+</section>
+<article> <!-- How it works-->
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque magnam recusandae, ut iste, ducimus illo numquam nulla blanditiis quia aut debitis. Tempore rerum dicta amet praesentium nisi voluptatum quae debitis!</p>
 
+<!--Hero thingy here too (asked by client ._.)-->
+</article>
+{% if isLogged %}
+<button>
+    FAST FLUSH - Find the nearest Thron
+</button>
+<div> <!-- Map -->
+    <form action="/search" method="POST"> <!-- Filters-->
+        <div> <!--Distance-->
+
+        </div>
+        <div> <!-- Price -->
+
+        </div>
+        <div> <!-- Options (shower, disabled access... see doc)-->
+
+        </div>
+        <input type="submit" value="Search">
+    </form>
+</div>
+{% else %}
+<a href="/login">> YOU NEED TO LOGIN IN ORDER TO USE THRON EXPRESS <</a>
+{% endif %}
 {% endblock %}
 
 
