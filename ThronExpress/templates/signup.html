@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block title %}Login{% endblock %}
+{% block contenu0 %}
+<form action="/signup/submit" method="POST">
+    <label>SIGN UP</label>
+    <h1 style="color:red; text-align: center;">{{ msg }}</h1>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="tel" name="phone" placeholder="Phone" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit" value="Sign up">
+</form>
+<a href="/login">You already have an account ? Log in</a>
+{% endblock %}

@@ -2,20 +2,10 @@ import sqlite3, hashlib, time
 def ouvrir_connexion():
     cnx = None
     try:
-        cnx = sqlite3.connect('Projet/db/bd_youtube.db')
+        cnx = sqlite3.connect('ThronExpress/db/thronDB.db')
     except BaseException as e:
         print(e)
     return cnx
-
-def research(query, userID = None):
-
-    cnx = ouvrir_connexion()
-    cur = cnx.cursor()
-    cur.execute("SELECT * FROM Videos WHERE title LIKE ? OR author LIKE ?", (f"%{query}%", f"%{query}%"))
-    rows = cur.fetchall()
-    cnx.close()
-
-    return getVideoTable(rows, userID)
 
 def db_identification(resultat):
     #hachage du mot de passe
@@ -25,13 +15,13 @@ def db_identification(resultat):
     cur = cnx.cursor()
     cur.execute("SELECT * \
     FROM Utilisateurs\
-    WHERE pseudo = ? AND password = ?",\
+    WHERE username = ? AND password = ?",\
     (resultat['login'], password.hexdigest()))
     rows = cur.fetchall()
     cnx.close()
     return rows
 
-def addUser(uuid, pseudo, mail, passwrd):
+def addUser(uuid, username, name, phone, passwrd):
     password = hashlib.sha256()
     password.update(bytes(passwrd, 'utf-8'))
 
@@ -39,13 +29,13 @@ def addUser(uuid, pseudo, mail, passwrd):
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
 
-    cur.execute("SELECT * FROM Utilisateurs WHERE adr_mail = ?", (mail,))
+    cur.execute("SELECT * FROM User WHERE phone = ?", (phone,))
     rows = cur.fetchall()
     if len(rows) != 0:
         return False
 
-    cur.execute("INSERT INTO Utilisateurs VALUES (?, ?, ?, ?)",(uuid, \
-                    mail, pseudo, password.hexdigest()))
+    cur.execute("INSERT INTO User VALUES (?, ?, ?, ?, ?, ?, ?)",(str(uuid), \
+                    username, name, phone, password.hexdigest(), False, None))
     cnx.commit()
     cnx.close()
     return True
@@ -54,10 +44,21 @@ def addUser(uuid, pseudo, mail, passwrd):
 def getUser(uuid):
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
-    cur.execute("SELECT * FROM Utilisateurs WHERE userID = ?", (uuid,))
+    cur.execute("SELECT * FROM User WHERE UUID = ?", (uuid,))
     rows = cur.fetchall()
     cnx.close()
     return rows[0] # retourne UN tuple (sinon renvoie une liste de 1 tuple donc c'est useless)
+
+def log_in(username, passwrd):
+    password = hashlib.sha256()
+    password.update(bytes(passwrd, 'utf-8'))
+
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+    cur.execute("SELECT * FROM User WHERE username = ? AND password = ?", (username, password.hexdigest()))
+    rows = cur.fetchall()
+    cnx.close()
+    return rows
 
 def changePassword(uuid, passwrd):
     password = hashlib.sha256()
@@ -68,30 +69,6 @@ def changePassword(uuid, passwrd):
 
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
-    cur.execute("UPDATE Utilisateurs SET password = ? WHERE userID = ?", (password.hexdigest(), uuid))
+    cur.execute("UPDATE User SET password = ? WHERE UUID = ?", (password.hexdigest(), uuid))
     cnx.commit()
     cnx.close()
-
-def getUserFromMail(mail):
-    cnx = ouvrir_connexion()
-    cur = cnx.cursor()
-    cur.execute("SELECT userID FROM Utilisateurs WHERE adr_mail = ?", (mail,))
-    rows = cur.fetchall()
-    cnx.close()
-
-    if len(rows) == 0:
-        return None
-
-    return rows[0][0]
-
-def getMailFromUser(userID):
-    cnx = ouvrir_connexion()
-    cur = cnx.cursor()
-    cur.execute("SELECT adr_mail FROM Utilisateurs WHERE userID = ?", (userID,))
-    rows = cur.fetchall()
-    cnx.close()
-
-    if len(rows) == 0:
-        return None
-
-    return rows[0][0]
