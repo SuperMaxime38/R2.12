@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, session, jsonify
 from .modele import *
-import uuid,os
+import uuid,os, json, requests
 app = Flask(__name__)
 
 # Config options - Make sure you created a 'config.py' file.
@@ -11,6 +11,13 @@ def index():
     isLogged = False
     if('ID' in session):
         isLogged = True
+
+    ip_address = requests.get('https://api64.ipify.org?format=json').json()["ip"]
+    url = 'https://ipinfo.io/' + ip_address + '/json'
+    r = requests.get(url)
+    j = json.loads(r.text)
+    session['lat'] = j["loc"].split(',')[0]
+    session['lon'] = j["loc"].split(',')[1]
 
     return render_template('index.html', isLogged = isLogged)
 
