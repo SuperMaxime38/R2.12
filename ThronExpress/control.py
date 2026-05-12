@@ -15,9 +15,13 @@ def index():
     ip_address = requests.get('https://api64.ipify.org?format=json').json()["ip"]
     url = 'https://ipinfo.io/' + ip_address + '/json'
     r = requests.get(url)
-    j = json.loads(r.text)
-    session['lat'] = j["loc"].split(',')[0]
-    session['lon'] = j["loc"].split(',')[1]
+    if(r.status_code == 200):
+        j = json.loads(r.text)
+        session['lat'] = j["loc"].split(',')[0]
+        session['lon'] = j["loc"].split(',')[1]
+    else:
+        session['lat'] = 45.166672
+        session['lon'] = 5.71667
 
     return render_template('index.html', isLogged = isLogged)
 
