@@ -12,17 +12,6 @@ def index():
     if('ID' in session):
         isLogged = True
 
-    ip_address = requests.get('https://api64.ipify.org?format=json').json()["ip"]
-    url = 'https://ipinfo.io/' + ip_address + '/json'
-    r = requests.get(url)
-    if(r.status_code == 200):
-        j = json.loads(r.text)
-        session['lat'] = j["loc"].split(',')[0]
-        session['lon'] = j["loc"].split(',')[1]
-    else:
-        session['lat'] = 45.166672
-        session['lon'] = 5.71667
-
     return render_template('index.html', isLogged = isLogged)
 
 @app.route('/search')
@@ -44,6 +33,7 @@ def login_submit():
     user = log_in(request.form['username'], request.form['password'])
     if(len(user) != 0):
         session['ID'] = user[0][0]
+        session['name'] = request.form['username']
         return redirect(url_for('index'))
     
     return redirect(url_for('login', msg = "Wrong username or password"))
@@ -62,14 +52,17 @@ def signup_submit():
     UUID = uuid.uuid4()
     if(addUser(UUID, request.form['username'], request.form['name'], request.form['phone'], request.form['password'])):
         session['ID'] = UUID
+        session['name'] = request.form['username']
         return redirect(url_for('index'))
 
     return redirect(url_for('signup', msg = "An account si already associated with this phone number"))
 
-@app.route('/account')
-def account():
-    # TODO
-    return render_template('index.html')
+@app.route('/profile')
+def profile():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+
+    return render_template('profile.html', name = session['name'])
 
 @app.route('/about')
 def about():
@@ -80,3 +73,28 @@ def about():
 def subscribtions():
     # TODO
     return render_template('index.html')
+
+@app.route('/api/markers')
+def get_markers():
+
+    lat, lon = geolocate()
+
+    data = {
+        "center": [lat, lon]
+        # Add markers there
+    }
+
+    return jsonify(data)
+
+def geolocate():
+    ip_address = requests.get('https://api64.ipify.org?format=json').json()["ip"]
+    url = 'https://ipinfo.io/' + ip_address + '/json'
+    r = requests.get(url)
+    lat = 45.166672
+    lon = 5.71667
+    if(r.status_code == 200):
+        j = json.loads(r.text)
+        lat = j["loc"].split(',')[0]
+        lon = j["loc"].split(',')[1]
+    
+    return lat, lon

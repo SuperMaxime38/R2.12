@@ -7,7 +7,7 @@ nav {
 
 nav a {
     text-decoration: none;
-    border: 1px solid black;
+    border: 1px solid blue;
     padding: 1.5em;
     color: black;
 }
@@ -28,11 +28,36 @@ nav div:nth-child(2) {
 nav div:last-child {
     justify-content: end;
 }
+
 nav div img {
     width: 64px;
     height: 64px;
     border: 1px solid black;
 }
+
 #map{
     height: 400px;
+}
+#fast_flush {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+#fast_flush a {
+    text-decoration: none;
+    border: 1px solid blue;
+    padding: 1.5em;
+    color: black;
+}
+
+.filters {
+    
+    border: 1px solid black;
+}
+
+.filters > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }

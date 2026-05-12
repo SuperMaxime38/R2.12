@@ -7,26 +7,40 @@
 <h2>Hero section here</h2>
 </section>
 <article> <!-- How it works-->
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque magnam recusandae, ut iste, ducimus illo numquam nulla blanditiis quia aut debitis. Tempore rerum dicta amet praesentium nisi voluptatum quae debitis!</p>
+<p>How it works: Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque magnam recusandae, ut iste, ducimus illo numquam nulla blanditiis quia aut debitis. Tempore rerum dicta amet praesentium nisi voluptatum quae debitis!</p>
 
 <!--Hero thingy here too (asked by client ._.)-->
 </article>
 {% if isLogged %}
-<button>
-    FAST FLUSH - Find the nearest Thron
-</button>
+<div id="fast_flush">
+    <a href="/search">
+        FAST FLUSH - Find the nearest Thron
+    </a>
+</div>
+
 <div> <!-- Map -->
-    <form action="/search" method="POST"> <!-- Filters-->
-        <div> <!--Distance-->
-
+    <form action="/search" method="POST" class="filters"> <!-- Filters-->
+        
+        <h3>Filters</h3>
+        <div>
+            <div> <!--Distance-->
+                <label for="distance">Distance</label>
+                <input type="range" name="distance" id="distance" min="1" max="5" value="1">
+            </div>
+            <div> <!-- Price -->
+                <label for="price">Price</label>
+                <input type="range" name="price" id="price" min="0" max="10" value="2">
+            </div>
+            <div> <!-- Options (shower, disabled access... see doc)-->
+                <label for="option">Options</label>
+                <input type="checkbox" name="option" id="option" value="Shower">
+                <input type="checkbox" name="option" id="option" value="Disabled access">
+                <input type="checkbox" name="option" id="option" value="Baby changing">
+                <input type="checkbox" name="option" id="option" value="Luxury">
+            </div>
+            <input type="submit" value="Search">
         </div>
-        <div> <!-- Price -->
-
-        </div>
-        <div> <!-- Options (shower, disabled access... see doc)-->
-
-        </div>
-        <input type="submit" value="Search">
+        
     </form>
     <div id="map"></div>
 </div>

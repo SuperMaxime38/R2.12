@@ -14,7 +14,7 @@
 		<nav>
 			<div>
 				<img src="" alt="logo">
-				<h1>Thron Express</h1>
+				<a href="/">Thron Express</a>
 			</div>
 			<div>
 				<a href="">Find a Thron</a>
@@ -22,7 +22,9 @@
 			</div>
 			<div>
 				{% if isLogged %}
-				<img src="">
+				<a href="/profile">
+					<img src="">
+				</a>
 				{% else %}
 				<a href="/login">Login | Sign up</a>
 				{% endif %}
