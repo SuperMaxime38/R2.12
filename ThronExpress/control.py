@@ -79,9 +79,11 @@ def get_markers():
 
     lat, lon = geolocate()
 
+    nearestToilets = getNearbyToilets(lat, lon, 5000)
+
     data = {
-        "center": [lat, lon]
-        # Add markers there
+        "center": [lat, lon],
+        "markers": nearestToilets
     }
 
     return jsonify(data)
