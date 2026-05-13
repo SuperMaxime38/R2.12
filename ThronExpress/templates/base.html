@@ -32,6 +32,29 @@
 		</nav>
 		{% block contenu0 %}{% endblock %}
 		<footer>
+				<div>
+                    <h4>subscription</h4>
+					<a href="#">subscribe</a>
+                </div>
+                <div>
+					{% if isLogged %}
+					<h4>your profile</h4>
+					<a href="/profile">Profile</a>
+					{% else %}
+					<h4>login</h4>
+					<a href="/login">Login | Sign up</a>
+					{% endif %}
+                </div>
+
+                <div>
+                    <h4>learn more</h4>
+					<a href="#">about us</a>
+                </div>
+				
+				<div>
+					<h4>Other function</h4>
+					<a href="#">become a host</a>
+				</div>
 		</footer>
 	</body>
 </html>
