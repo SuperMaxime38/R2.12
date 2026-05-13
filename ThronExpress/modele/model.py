@@ -1,4 +1,5 @@
-import sqlite3, hashlib, time
+import sqlite3, hashlib
+from math import pi, sin, cos, atan2, sqrt
 def ouvrir_connexion():
     cnx = None
     try:
@@ -59,6 +60,38 @@ def log_in(username, passwrd):
     rows = cur.fetchall()
     cnx.close()
     return rows
+
+def getNearbyToilets(lat, lon, threshold):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+
+    cur.execute("SELECT * FROM Bathroom")
+    rows = cur.fetchall()
+    cnx.close()
+
+    result = []
+    for row in rows:
+        distance = calc_distance(lat, lon, row[4], row[5])
+        if distance <= threshold:
+            result.append(row)
+
+    return result
+
+def calc_distance(lat1, lon1, lat2, lon2):
+    R = 6371e3
+    phi1 = lat1 * pi/180
+    phi2 = lat2 * pi/180
+
+    deltaPhi = (lat2-lat1) * pi/180
+    deltaLambda = (lon2 - lon1) * pi/180
+
+    a = sin(deltaPhi/2) * sin(deltaPhi/2) + \
+    cos(phi1) * cos(phi2) * \
+    sin(deltaLambda/2) * sin(deltaLambda/2)
+
+    c = 2 * atan2(sqrt(a), sqrt(1-a))
+
+    return R * c
 
 def changePassword(uuid, passwrd):
     password = hashlib.sha256()

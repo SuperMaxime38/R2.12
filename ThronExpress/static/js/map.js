@@ -8,6 +8,10 @@ async function initMap() {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    for(marker in data["markers"]) {
+        var marker = L.marker([marker[4], marker[5]]).addTo(map);
+    }
 }
 
 initMap();
