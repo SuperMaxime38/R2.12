@@ -2,6 +2,11 @@
 
 
 {% block title %}Home{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaflet.css')}}"/>
+    <script src="{{url_for('static',filename='js/leaflet.js')}}" defer></script>
+    <script src="{{url_for('static',filename='js/map.js')}}" defer></script>
+{% endblock %}
 {% block contenu0 %}
 <section> <!-- Hero section-->
 <h2>Hero section here</h2>

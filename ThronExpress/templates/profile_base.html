@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/profile.css')}}">
+{% endblock %}
+{% block contenu0 %}
+<div class="profile">
+    <div class="nav">
+        <a href="/profile">Profile</a>
+        {% if isHost %}
+            <a href="/my/throns">My throns</a>
+        {% else %}
+            <a href="/become/a/host">Become a host</a>
+        {% endif %}
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="content">
+        {% block contenu1 %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

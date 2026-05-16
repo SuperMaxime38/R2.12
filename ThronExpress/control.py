@@ -34,6 +34,8 @@ def login_submit():
     if(len(user) != 0):
         session['ID'] = user[0][0]
         session['name'] = request.form['username']
+        session['isHost'] = user[0][5]
+
         return redirect(url_for('index'))
     
     return redirect(url_for('login', msg = "Wrong username or password"))
@@ -53,6 +55,7 @@ def signup_submit():
     if(addUser(UUID, request.form['username'], request.form['name'], request.form['phone'], request.form['password'])):
         session['ID'] = UUID
         session['name'] = request.form['username']
+        session['isHost'] = False
         return redirect(url_for('index'))
 
     return redirect(url_for('signup', msg = "An account si already associated with this phone number"))
@@ -62,7 +65,23 @@ def profile():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
 
-    return render_template('profile.html', name = session['name'])
+    return render_template('profile.html', name = session['name'], isHost = session['isHost'])
+
+@app.route('/become/a/host')
+def become_a_host():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    # TODO
+    return render_template('index.html')
+
+@app.route('/my/throns')
+def my_throns():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+
+    # TODO
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
