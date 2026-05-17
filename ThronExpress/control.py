@@ -35,6 +35,7 @@ def login_submit():
         session['ID'] = user[0][0]
         session['name'] = request.form['username']
         session['isHost'] = user[0][5]
+        print(session['isHost'])
 
         return redirect(url_for('index'))
     
@@ -67,21 +68,60 @@ def profile():
 
     return render_template('profile.html', name = session['name'], isHost = session['isHost'])
 
-@app.route('/become/a/host')
-def become_a_host():
+@app.route('/thron/new')
+def new_thron():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
     
-    # TODO
-    return render_template('index.html')
+    if(session['isHost']):
+        return redirect(url_for('profile'))
+    
+    return render_template('new_thron.html')
+
+@app.route('/thron/new/submit', methods=['POST'])
+def new_thron_submit():
+    
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    if(session['isHost']):
+        return redirect(url_for('profile'))
+    
+    street = request.form.get('street')
+    city = request.form.get('city')
+    zipcode = request.form.get('zipcode')
+    country = request.form.get('country')
+    adress = street + ", " + city + ", " + zipcode + ", " + country
+
+    if(doesBathroomExists(adress)):
+        return redirect(url_for('new_thron', msg = "A bathroom already exisst at this address"))
+
+    hasShower = booleanConvert(request.form.get('hasShower'))
+    hasDisabledAccess = booleanConvert(request.form.get('hasDisabledAccess'))
+    hasChangingRoom = booleanConvert(request.form.get('hasChangingRoom'))
+    hasLuxury = booleanConvert(request.form.get('hasLuxury'))
+
+    uid = uuid.uuid4()
+    lat, lon = getCoords(street, city, zipcode, country)
+
+
+    if(addHost(uid, session['ID'], adress, lat, lon, hasShower, hasDisabledAccess, hasChangingRoom, hasLuxury)):
+        session['isHost'] = True
+
+    return redirect(url_for('my_throns'))
 
 @app.route('/my/throns')
 def my_throns():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    if(not session['isHost']):
+        return redirect(url_for('new_thron'))
 
-    # TODO
-    return render_template('index.html')
+    bathrooms = getBathrooms(session['ID'])
+
+
+    return render_template('my_throns.html', bathrooms = bathrooms)
 
 @app.route('/about')
 def about():
@@ -98,11 +138,23 @@ def get_markers():
 
     lat, lon = geolocate()
 
-    nearestToilets = getNearbyToilets(lat, lon, 5000)
+    nearestToilets = getNearbyToilets(lat, lon, 500000)
+    print(nearestToilets)
 
     data = {
         "center": [lat, lon],
         "markers": nearestToilets
+    }
+
+    return jsonify(data)
+
+@app.route('/api/markers/my')
+def get_my_markers():
+    bathrooms = getBathrooms(session['ID'])
+
+    data = {
+        "center": [bathrooms[0][3], bathrooms[0][4]],
+        "markers": bathrooms
     }
 
     return jsonify(data)
@@ -119,3 +171,24 @@ def geolocate():
         lon = j["loc"].split(',')[1]
     
     return lat, lon
+
+def getCoords(street, city, zipcode, country):
+    headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
+    response = requests.get('https://nominatim.openstreetmap.org/search?street=' + street + '&city=' + city + '&postalcode=' + zipcode + '&country=' + country + '&format=json', headers=headers)
+    if(response.status_code != 200):
+        print(response.status_code)
+        return None
+
+    data = response.json()
+
+    if(len(data) == 0):
+        return None
+
+    print(data)
+    return data[0]["lat"], data[0]["lon"]
+
+def booleanConvert(value):
+    if(value == "on"):
+        return True
+    else:
+        return False

@@ -50,6 +50,14 @@ def getUser(uuid):
     cnx.close()
     return rows[0] # retourne UN tuple (sinon renvoie une liste de 1 tuple donc c'est useless)
 
+def getBathrooms(uuid):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+    cur.execute("SELECT * FROM Bathroom WHERE OwnerID = ?", (uuid,))
+    rows = cur.fetchall()
+    cnx.close()
+    return rows
+
 def log_in(username, passwrd):
     password = hashlib.sha256()
     password.update(bytes(passwrd, 'utf-8'))
@@ -65,13 +73,13 @@ def getNearbyToilets(lat, lon, threshold):
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
 
-    cur.execute("SELECT * FROM Bathroom")
+    cur.execute("SELECT latitude, longitude FROM Bathroom")
     rows = cur.fetchall()
     cnx.close()
 
     result = []
     for row in rows:
-        distance = calc_distance(lat, lon, row[4], row[5])
+        distance = calc_distance(float(lat), float(lon), float(row[0]), float(row[1]))
         if distance <= threshold:
             result.append(row)
 
@@ -105,3 +113,29 @@ def changePassword(uuid, passwrd):
     cur.execute("UPDATE User SET password = ? WHERE UUID = ?", (password.hexdigest(), uuid))
     cnx.commit()
     cnx.close()
+
+def doesBathroomExists(adresse):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+    cur.execute("SELECT * FROM Bathroom WHERE adresse = ?", (adresse,))
+    rows = cur.fetchall()
+    cnx.close()
+    return len(rows) > 0
+
+def addHost(uid, uuid, adresse, lat, lon, hasShower, hasDisabledAccess, hasChangingRoom, hasLuxury):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+
+    cur.execute("SELECT * FROM Bathroom WHERE adresse = ?", (adresse,))
+    rows = cur.fetchall()
+    if len(rows) != 0:
+        return False
+
+    cur.execute("INSERT INTO Bathroom VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",(str(uid), uuid, adresse, lat, lon, hasShower, hasDisabledAccess, hasChangingRoom, hasLuxury))
+
+    cur.execute("UPDATE User SET isHost = 1 WHERE UUID = ?", (uuid,))
+
+    cnx.commit()
+    cnx.close()
+
+    return True

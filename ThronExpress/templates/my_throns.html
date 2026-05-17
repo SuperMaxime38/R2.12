@@ -1,0 +1,24 @@
+{% extends "profile_base.html" %}
+
+{% block contenu1 %}
+
+{% for bathroom in bathrooms %}
+<section>
+    <h3> {{bathroom[2]}} </h3>
+    <p>Options:
+        {% if bathroom[5] %}
+            Shower
+        {% endif %}
+        {% if bathroom[6] %}
+            Disabled access
+        {% endif %}
+        {% if bathroom[7] %}
+            Baby changing
+        {% endif %}
+        {% if bathroom[8] %}
+            Luxury
+        {% endif %}
+    </p>
+</section>
+{% endfor %}
+{% endblock %}

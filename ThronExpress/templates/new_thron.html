@@ -1,0 +1,39 @@
+{% extends "profile_base.html" %}
+
+{% block contenu1 %}
+<h1>You want to be a host ?</h1>
+<p>
+    Get a compensation for sharing your bathroom with other users !
+    <br>You simply need to give us some informations and after approval, you will be able to be part of our host community
+</p>
+<form action="/thron/new/submit" method="POST">
+    <h2 style="color:red; text-align: center;">{{ msg }}</h2>
+    <label for="street">Street: </label>
+    <input type="text" name="street" placeholder="Street" required>
+
+    <label for="city">City: </label>
+    <input type="text" name="city" placeholder="City" required>
+
+    <label for="zipcode">ZipCode: </label>
+    <input type="text" name="zipcode" placeholder="ZipCode" required>
+    
+    <label for="country">Country: </label>
+    <input type="text" name="country" placeholder="Country" required>
+
+    <label>Options:</label>
+    
+    <label for="hasShower">Shower: </label>
+    <input type="checkbox" name="hasShower">
+
+    <label for="hasDisabledAccess">Disabled access: </label>
+    <input type="checkbox" name="hasDisabledAccess">
+
+    <label for="hasChangingRoom">Baby changing: </label>
+    <input type="checkbox" name="hasChangingRoom">
+
+    <label for="hasLuxury">Luxury: </label>
+    <input type="checkbox" name="hasLuxury">
+
+    <input type="submit" value="Become a host now">
+</form>
+{% endblock %}
