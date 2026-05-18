@@ -16,7 +16,6 @@
 
 <!--Hero thingy here too (asked by client ._.)-->
 </article>
-{% if isLogged %}
 <div id="fast_flush">
     <a href="/search">
         FAST FLUSH - Find the nearest Thron
@@ -49,9 +48,6 @@
     </form>
     <div id="map"></div>
 </div>
-{% else %}
-<a href="/login">> YOU NEED TO LOGIN IN ORDER TO USE THRON EXPRESS <</a>
-{% endif %}
 {% endblock %}
 
 

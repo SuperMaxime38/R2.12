@@ -4,9 +4,10 @@
 {% block title %}Login{% endblock %}
 {% block extra_head %}{% endblock %}
 {% block contenu0 %}
+
+<h1 style="color:red; text-align: center;">{{ msg }}</h1>
 <form action="/signup/submit" method="POST">
     <label>SIGN UP</label>
-    <h1 style="color:red; text-align: center;">{{ msg }}</h1>
     <input type="text" name="username" placeholder="Username" required>
     <input type="text" name="name" placeholder="Name" required>
     <input type="tel" name="phone" placeholder="Phone" required>

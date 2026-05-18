@@ -8,11 +8,8 @@ app.config.from_pyfile('config.py')
 
 @app.route('/')
 def index():
-    isLogged = False
-    if('ID' in session):
-        isLogged = True
 
-    return render_template('index.html', isLogged = isLogged)
+    return render_template('index.html')
 
 @app.route('/search')
 def search():
@@ -66,7 +63,7 @@ def profile():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
 
-    return render_template('profile.html', name = session['name'], isHost = session['isHost'])
+    return render_template('profile.html', selected = 'profile')
 
 @app.route('/thron/new')
 def new_thron():
@@ -76,7 +73,7 @@ def new_thron():
     if(session['isHost']):
         return redirect(url_for('profile'))
     
-    return render_template('new_thron.html')
+    return render_template('new_thron.html', selected = 'throns')
 
 @app.route('/thron/new/submit', methods=['POST'])
 def new_thron_submit():
@@ -121,7 +118,7 @@ def my_throns():
     bathrooms = getBathrooms(session['ID'])
 
 
-    return render_template('my_throns.html', bathrooms = bathrooms)
+    return render_template('my_throns.html', bathrooms = bathrooms, selected = 'throns')
 
 @app.route('/about')
 def about():
@@ -132,6 +129,11 @@ def about():
 def subscribtions():
     # TODO
     return render_template('index.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/api/markers')
 def get_markers():
