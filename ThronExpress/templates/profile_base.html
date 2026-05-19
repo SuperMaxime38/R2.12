@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/profile.css')}}">
+{% endblock %}
+{% block contenu0 %}
+<div class="profile">
+    <div class="nav">
+        {% if selected == "profile" %}
+        <a href="/profile" class="selected">Profile</a>
+        {% else %}
+        <a href="/profile">Profile</a>
+        {% endif %}
+        {% if selected == "throns" %}
+            {% if session['isHost'] == True %}
+                <a href="/my/throns" class="selected">My throns</a>
+            {% else %}
+                <a href="/thron/new" class="selected">Become a host</a>
+            {% endif %}
+        {% else %}
+            {% if session['isHost'] == True %}
+                <a href="/my/throns">My throns</a>
+            {% else %}
+                <a href="/thron/new">Become a host</a>
+            {% endif %}
+        {% endif %}
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="content">
+        {% block contenu1 %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

@@ -1,15 +1,39 @@
+:root {
+    --lxGray: #3a3a3a;
+    --lxLighterGray: #4d4d4d;
+    --lxGold: #DAA520;
+    --lxWhite: #f8f8f8;
+    --lxNacre: #fffbee;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
+
+    background-color: var(--lxLighterGray);
 }
 
 nav a {
     text-decoration: none;
-    border: 1px solid blue;
-    padding: 1.5em;
-    color: black;
+    padding: 1.5rem;
+    background-color: var(--lxGray);
+    color: var(--lxWhite);
+}
+
+nav a:hover {
+    background-color: var(--lxGold);
+    color: var(--lxGray);
+}
+
+.user_link {
+    padding: 0.7rem;
 }
 
 nav div {

@@ -2,6 +2,11 @@
 
 
 {% block title %}Home{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaflet.css')}}"/>
+    <script src="{{url_for('static',filename='js/leaflet.js')}}" defer></script>
+    <script src="{{url_for('static',filename='js/map.js')}}" defer></script>
+{% endblock %}
 {% block contenu0 %}
 <section> <!-- Hero section-->
 <h2>Hero section here</h2>
@@ -11,7 +16,6 @@
 
 <!--Hero thingy here too (asked by client ._.)-->
 </article>
-{% if isLogged %}
 <div id="fast_flush">
     <a href="/search">
         FAST FLUSH - Find the nearest Thron
@@ -25,18 +29,22 @@
         <div>
             <div> <!--Distance-->
                 <label for="distance">Distance</label>
-                <input type="range" name="distance" id="distance" min="1" max="5" value="1">
+                <input type="range" name="distance" id="distance" min="1" max="50000" {% if distance %} value="{{distance}}" {% else %} value="1000" {% endif %}>
             </div>
-            <div> <!-- Price -->
+            <!-- <div>  NOTE: Ce sont des abonnements peut-on vraiment filtrer par prix ?
                 <label for="price">Price</label>
                 <input type="range" name="price" id="price" min="0" max="10" value="2">
-            </div>
+            </div> -->
             <div> <!-- Options (shower, disabled access... see doc)-->
                 <label for="option">Options</label>
-                <input type="checkbox" name="option" id="option" value="Shower">
-                <input type="checkbox" name="option" id="option" value="Disabled access">
-                <input type="checkbox" name="option" id="option" value="Baby changing">
-                <input type="checkbox" name="option" id="option" value="Luxury">
+                <label for="hasShower">Shower: </label>
+                <input type="checkbox" name="hasShower" id="option" {% if hasShower %} checked {% endif %}>
+                <label for="hasDisabledAccess">Disabled access: </label>
+                <input type="checkbox" name="hasDisabledAccess" id="option" {% if hasDisabledAccess %} checked {% endif %}>
+                <label for="hasChangingRoom">Baby changing: </label>
+                <input type="checkbox" name="hasChangingRoom" id="option" {% if hasChangingRoom %} checked {% endif %}>
+                <label for="hasLuxury">Luxury: </label>
+                <input type="checkbox" name="hasLuxury" id="option" {% if hasLuxury %} checked {% endif %}>
             </div>
             <input type="submit" value="Search">
         </div>
@@ -44,9 +52,6 @@
     </form>
     <div id="map"></div>
 </div>
-{% else %}
-<a href="/login">> YOU NEED TO LOGIN IN ORDER TO USE THRON EXPRESS <</a>
-{% endif %}
 {% endblock %}
 
 

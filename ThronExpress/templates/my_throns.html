@@ -1,0 +1,30 @@
+{% extends "profile_base.html" %}
+
+{% block contenu1 %}
+
+{% for bathroom in bathrooms %}
+<section>
+    <h3> {{bathroom[2]}} </h3>
+    <p><strong>Options:</strong><br>
+        <ul>
+            {% if bathroom[5] %}
+            <li>Shower</li>
+        {% endif %}
+        {% if bathroom[6] %}
+            <li>Disabled access</li>
+        {% endif %}
+        {% if bathroom[7] %}
+            <li>Baby changing</li>
+        {% endif %}
+        {% if bathroom[8] %}
+            <li>Luxury</li>
+        {% endif %}
+        </ul>
+        
+    </p>
+</section>
+{% endfor %}
+<a href="/thron/new">Add a new bathroom</a>
+
+
+{% endblock %}

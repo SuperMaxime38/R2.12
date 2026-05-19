@@ -1,0 +1,80 @@
+.profile {
+    display: flex;
+    height: 100%;
+}
+
+.nav {
+    flex: 0.15;
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--lxGray);
+    border-right: 2px solid var(--lxGold);
+
+    margin-right: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.selected {
+    background-color: var(--lxGold);
+    color: var(--lxWhite);
+}
+
+.nav a {
+    
+    color: var(--lxWhite);
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.nav a:hover {
+    background-color: var(--lxGold);
+    color: var(--lxGray);
+}
+
+.content {
+    flex: 0.85;
+}
+
+.content section {
+    background-color: var(--lxNacre);
+}
+
+.centered {
+    text-align: center;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+
+form div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+form label {
+    flex: 0.5;
+}
+
+form input {
+    flex: 1.5;
+}
+
+form input[type="checkbox"] {
+    flex: 0;
+}
+
+input[type="submit"] {
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.half {
+    width: 50%;
+}
