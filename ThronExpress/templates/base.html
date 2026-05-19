@@ -15,7 +15,11 @@
 			</div>
 			<div>
 				<a href="">Find a Thron</a>
-				<a href="/thron/new">Become a Host</a>
+				{% if session['isHost'] %}
+				<a href="/my/throns">My Throns</a>
+				{% else %}
+				<a href="/become/a/host">Become a Host</a>
+				{% endif %}
 			</div>
 			<div>
 				{% if session['ID'] %}

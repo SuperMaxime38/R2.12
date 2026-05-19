@@ -69,37 +69,34 @@ def log_in(username, passwrd):
     cnx.close()
     return rows
 
-def getNearbyToilets(lat, lon, threshold):
+def get_bank_id(uuid):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+    cur.execute("SELECT Bank FROM User WHERE UUID = ?", (str(uuid),))
+    rows = cur.fetchall()
+    cnx.close()
+    return rows[0][0]
+
+def add_bank_id(uuid, card_number, expiration_date, cvv):
+
+    value = str(card_number) + " " + str(expiration_date) + " " + str(cvv)
+
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
 
-    cur.execute("SELECT latitude, longitude FROM Bathroom")
+    cur.execute("UPDATE User SET Bank = ? WHERE UUID = ?", (value, str(uuid)))
+    cnx.commit()
+    cnx.close()
+
+def getToilets():
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+
+    cur.execute("SELECT latitude, longitude, hasShower, hasDisabledAccess, hasChangingRoom, hasLuxury FROM Bathroom")
     rows = cur.fetchall()
     cnx.close()
 
-    result = []
-    for row in rows:
-        distance = calc_distance(float(lat), float(lon), float(row[0]), float(row[1]))
-        if distance <= threshold:
-            result.append(row)
-
-    return result
-
-def calc_distance(lat1, lon1, lat2, lon2):
-    R = 6371e3
-    phi1 = lat1 * pi/180
-    phi2 = lat2 * pi/180
-
-    deltaPhi = (lat2-lat1) * pi/180
-    deltaLambda = (lon2 - lon1) * pi/180
-
-    a = sin(deltaPhi/2) * sin(deltaPhi/2) + \
-    cos(phi1) * cos(phi2) * \
-    sin(deltaLambda/2) * sin(deltaLambda/2)
-
-    c = 2 * atan2(sqrt(a), sqrt(1-a))
-
-    return R * c
+    return rows
 
 def changePassword(uuid, passwrd):
     password = hashlib.sha256()

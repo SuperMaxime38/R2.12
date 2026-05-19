@@ -9,12 +9,19 @@ app.config.from_pyfile('config.py')
 @app.route('/')
 def index():
 
-    return render_template('index.html')
+    hasShower = False
+    hasDisabledAccess = False
+    hasChangingRoom = False
+    hasLuxury = False
+    distance = 50000
 
-@app.route('/search')
-def search():
-    # TODO
-    return render_template('index.html')
+    if 'filter_distance' in session: distance = session['filter_distance']
+    if 'filter_shower' in session and session['filter_shower']: hasShower = True
+    if 'filter_disabled_access' in session and session['filter_disabled_access']: hasDisabledAccess = True
+    if 'filter_changing_room' in session and session['filter_changing_room']: hasChangingRoom = True
+    if 'filter_luxury' in session and session['filter_luxury']: hasLuxury = True
+
+    return render_template('index.html', hasShower = hasShower, hasDisabledAccess = hasDisabledAccess, hasChangingRoom = hasChangingRoom, hasLuxury = hasLuxury, distance = distance)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -65,13 +72,36 @@ def profile():
 
     return render_template('profile.html', selected = 'profile')
 
+@app.route('/become/a/host')
+def become_a_host():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    if(session['isHost'] or get_bank_id(session['ID']) != None):
+        return redirect(url_for('new_thron'))
+    
+    return render_template('bank.html')
+
+@app.route('/bank/submit', methods=['POST'])
+def bank_submit():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    if(session['isHost'] or get_bank_id(session['ID']) != []):
+        return redirect(url_for('new_thron'))
+    
+    card_number = request.form.get('card_number')
+    expiration_date = request.form.get('expiration_date')
+    cvv = request.form.get('cvv')
+
+    add_bank_id(session['ID'], card_number, expiration_date, cvv)
+
+    return redirect(url_for('new_thron'))
+
 @app.route('/thron/new')
 def new_thron():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
-    
-    if(session['isHost']):
-        return redirect(url_for('profile'))
     
     return render_template('new_thron.html', selected = 'throns')
 
@@ -80,9 +110,6 @@ def new_thron_submit():
     
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
-    
-    if(session['isHost']):
-        return redirect(url_for('profile'))
     
     street = request.form.get('street')
     city = request.form.get('city')
@@ -135,17 +162,43 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+@app.route('/search', methods=['POST'])
+def search():
+    session['filter_distance'] = request.form.get('distance')
+    session['filter_shower'] = booleanConvert(request.form.get('hasShower'))
+    session['filter_disabled_access'] = booleanConvert(request.form.get('hasDisabledAccess'))
+    session['filter_changing_room'] = booleanConvert(request.form.get('hasChangingRoom'))
+    session['filter_luxury'] = booleanConvert(request.form.get('hasLuxury'))
+
+    return redirect(url_for('index'))
+
 @app.route('/api/markers')
 def get_markers():
 
     lat, lon = geolocate()
 
-    nearestToilets = getNearbyToilets(lat, lon, 500000)
-    print(nearestToilets)
+    toilets = getToilets()
+
+    hasShower = False
+    hasDisabledAccess = False
+    hasChangingRoom = False
+    hasLuxury = False
+    distance = 50000
+
+    if 'filter_distance' in session: distance = session['filter_distance']
+    if 'filter_shower' in session and session['filter_shower']: hasShower = True
+    if 'filter_disabled_access' in session and session['filter_disabled_access']: hasDisabledAccess = True
+    if 'filter_changing_room' in session and session['filter_changing_room']: hasChangingRoom = True
+    if 'filter_luxury' in session and session['filter_luxury']: hasLuxury = True
 
     data = {
         "center": [lat, lon],
-        "markers": nearestToilets
+        "markers": toilets,
+        "distance": distance,
+        "hasShower": hasShower,
+        "hasDisabledAccess": hasDisabledAccess,
+        "hasChangingRoom": hasChangingRoom,
+        "hasLuxury": hasLuxury
     }
 
     return jsonify(data)

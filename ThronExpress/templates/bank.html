@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Bank{% endblock %}
+{% block contenu0 %}
+<h2>You need to bind your bank account to access our services</h2>
+<form action="/bank/submit" method="POST">
+    <input type="text" name="card_number" placeholder="Card number">
+    <input type="text" name="expiration_date" placeholder="Expiration date mm/yyyy">
+    <input type="text" name="cvv" placeholder="CVV">
+
+    <input type="submit" value="Bind">
+</form>
+{% endblock %}

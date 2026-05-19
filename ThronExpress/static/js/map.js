@@ -21,9 +21,35 @@ async function initMap() {
     let i = 0;
     while(i < data["markers"].length) {
         marker = data["markers"][i];
-        var mrk = L.marker([marker[0], marker[1]], {icon: markerIcon}).addTo(map);
+
+        if(
+            !(data["hasShower"] && !marker[3]) &&
+            !(data["hasDisabledAccess"] && !marker[4]) &&
+            !(data["hasChangingRoom"] && !marker[5]) &&
+            !(data["hasLuxury"] && !marker[6]) &&
+            !(calc_dist(data["center"][0], data["center"][1], marker[0], marker[1]) > data["distance)"])
+        )
+        {
+            var mrk = L.marker([marker[0], marker[1]], {icon: markerIcon}).addTo(map);
+        }
         i++;
     }
+}
+
+async function calc_dist(lat1, lon1, lat2, lon2) {
+
+    const R = 6371e3;
+    const phi1 = lat1 * Math.PI/180;
+    const phi2 = lat2 * Math.PI/180;
+
+    const deltaPhi = (lat2 - lat1) * Math.PI/180;
+    const deltaLambda = (lon2 - lon1) * Math.PI/180;
+
+    const a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda/2) * Math.sin(deltaLambda/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c;
+
 }
 
 initMap();

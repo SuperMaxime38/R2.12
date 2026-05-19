@@ -39,3 +39,42 @@
 .content section {
     background-color: var(--lxNacre);
 }
+
+.centered {
+    text-align: center;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+
+form div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+form label {
+    flex: 0.5;
+}
+
+form input {
+    flex: 1.5;
+}
+
+form input[type="checkbox"] {
+    flex: 0;
+}
+
+input[type="submit"] {
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.half {
+    width: 50%;
+}

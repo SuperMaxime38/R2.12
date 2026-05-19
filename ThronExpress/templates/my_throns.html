@@ -5,20 +5,26 @@
 {% for bathroom in bathrooms %}
 <section>
     <h3> {{bathroom[2]}} </h3>
-    <p>Options:
-        {% if bathroom[5] %}
-            Shower
+    <p><strong>Options:</strong><br>
+        <ul>
+            {% if bathroom[5] %}
+            <li>Shower</li>
         {% endif %}
         {% if bathroom[6] %}
-            Disabled access
+            <li>Disabled access</li>
         {% endif %}
         {% if bathroom[7] %}
-            Baby changing
+            <li>Baby changing</li>
         {% endif %}
         {% if bathroom[8] %}
-            Luxury
+            <li>Luxury</li>
         {% endif %}
+        </ul>
+        
     </p>
 </section>
 {% endfor %}
+<a href="/thron/new">Add a new bathroom</a>
+
+
 {% endblock %}
