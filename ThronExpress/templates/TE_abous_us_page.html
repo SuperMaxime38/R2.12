@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+{% block extra_head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/TE_about_us_page.css')}}">
+{% endblock %}
+
+{% block contenu0 %}
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>About <span>ThronExpress</span></h1>
+            <p>The Urban Bathroom Sharing Platform. Redefining Privacy, Hygiene, and Accessibility in the Modern City.</p>
+        </div>
+    </section>
+
+    <section class="core-values">
+        <div class="container">
+            <h2 class="section-title">Who <span>We Are</span></h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fa-solid fa-id-card"></i>
+                    <h3>Identity</h3>
+                    <p>ThronExpress operates at the intersection of urban technology and the sharing economy, providing high-standard private sanitation solutions.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-city"></i>
+                    <h3>Urban Focus</h3>
+                    <p>Designed for dense metropolises where public infrastructure fails to meet the basic needs of a mobile population.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-handshake"></i>
+                    <h3>P2P Model</h3>
+                    <p>Connecting trusted Hosts who share their personal space with verified Users seeking a premium, clean experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section">
+        <div class="container story-content">
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1000&auto=format&fit=crop" alt="City Challenges">
+            </div>
+            <div class="story-text">
+                <h2>The Urban Challenge</h2>
+                <p>In big cities, finding clean and accessible public toilets is a real nightmare. Public facilities are often neglected, unavailable at night, or non-existent in high-traffic zones.</p>
+                <p><strong>Our Solution:</strong> We created a digital interface to bridge this gap. A reliable web and mobile platform ensuring trust, verification, and strict hygiene standards through a rigorous vetting process for Hosts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <div class="container impact-content">
+            <h2>The "Flush for Good" <span>Program</span></h2>
+            <p>We believe sanitation is a human right. For every session booked on our platform, a percentage of the fee is donated to international charities installing toilets in developing nations.</p>
+        </div>
+    </section>
+
+    
+
+</main>
+{% endblock %}

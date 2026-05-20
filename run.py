@@ -5,7 +5,7 @@ Created on Thu Nov 14 14:31:29 2024
 
 @author: cardotcm
 """
-import os, secrets
+import secrets
 
 from ThronExpress import app
 if __name__ == "__main__":

@@ -149,8 +149,7 @@ def my_throns():
 
 @app.route('/about')
 def about():
-    # TODO
-    return render_template('index.html')
+    return render_template('TE_abous_us_page.html')
 
 @app.route('/subscribtions')
 def subscribtions():
