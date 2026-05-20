@@ -1,80 +1,316 @@
+/* ==========================================================================
+   THRON EXPRESS — PROFILE / DASHBOARD STYLES
+   ========================================================================== */
+
 .profile {
     display: flex;
-    height: 100%;
+    min-height: calc(100vh - 70px - 160px);
 }
 
+/* --------------------------------------------------------------------------
+   SIDEBAR NAV
+   -------------------------------------------------------------------------- */
 .nav {
-    flex: 0.15;
+    flex: 0 0 220px;
     display: flex;
     flex-direction: column;
-
-    background-color: var(--lxGray);
-    border-right: 2px solid var(--lxGold);
-
-    margin-right: 0.5rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.selected {
-    background-color: var(--lxGold);
-    color: var(--lxWhite);
+    background: linear-gradient(180deg, var(--lxGray) 0%, #011f28 100%);
+    border-right: 1px solid var(--lxGold);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    padding-top: 1rem;
 }
 
 .nav a {
-    
-    color: var(--lxWhite);
     text-decoration: none;
-    padding: 0.5rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: 'Montserrat', Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    border-left: 2px solid transparent;
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
 .nav a:hover {
-    background-color: var(--lxGold);
-    color: var(--lxGray);
+    color: var(--lxGold);
+    background: rgba(26, 188, 156, 0.07);
+    border-left-color: var(--lxGold);
 }
 
+.nav a.selected {
+    color: var(--lxGold);
+    background: rgba(26, 188, 156, 0.1);
+    border-left-color: var(--lxGold);
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   CONTENT AREA
+   -------------------------------------------------------------------------- */
 .content {
-    flex: 0.85;
+    flex: 1;
+    padding: 2.5rem 3rem;
+    background: #012a35;
+    overflow-y: auto;
 }
 
+.content h1 {
+    font-family: 'Montserrat', Verdana, sans-serif;
+    color: var(--lxWhite);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+}
+
+.content h2 {
+    font-family: 'Montserrat', Verdana, sans-serif;
+    color: var(--lxGold);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 1.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(26, 188, 156, 0.2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.content h3 {
+    font-family: 'Montserrat', Verdana, sans-serif;
+    color: rgba(26, 188, 156, 0.85);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.content p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+    max-width: 600px;
+}
+
+/* Bathroom cards in my_throns */
 .content section {
-    background-color: var(--lxNacre);
+    background: linear-gradient(135deg, #013d4a 0%, #024555 100%);
+    border: 1px solid rgba(26, 188, 156, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.centered {
-    text-align: center;
-    width: 100%;
+.content section:hover {
+    border-color: var(--lxGold);
+    box-shadow: 0 0 24px rgba(26, 188, 156, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
 }
 
-form {
+.content section ul {
+    list-style: none;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.content section ul li {
+    color: var(--lxGold);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(26, 188, 156, 0.35);
+    border-radius: 2px;
+    background: rgba(26, 188, 156, 0.07);
+}
+
+/* "Add bathroom" link */
+.content > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    background: var(--lxGold);
+    color: #0d2332;
+    font-family: 'Montserrat', Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 24px rgba(26, 188, 156, 0.18);
+}
+
+.content > a:hover {
+    background: #2fd4b0;
+    box-shadow: 0 0 40px rgba(26, 188, 156, 0.35);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   FORMS INSIDE PROFILE (new_thron, etc.)
+   -------------------------------------------------------------------------- */
+.content form {
     display: flex;
     flex-direction: column;
-    width: 20vw;
+    gap: 0;
+    width: min(420px, 100%);
+    background: linear-gradient(175deg, #013d4a 0%, #024555 100%);
+    border: 1px solid rgba(26, 188, 156, 0.22);
+    border-radius: 8px;
+    padding: 2rem 1.75rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    margin-top: 1rem;
 }
 
-form div {
+.content form div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 1rem;
 }
 
-form label {
-    flex: 0.5;
+.content form div:last-of-type { border-bottom: none; }
+
+.content form label {
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-width: 120px;
 }
 
-form input {
-    flex: 1.5;
+.content form input[type="text"],
+.content form input[type="tel"] {
+    flex: 1;
+    padding: 0.65rem 0.85rem;
+    background: #025060;
+    border: 1px solid rgba(26, 188, 156, 0.18);
+    border-radius: 4px;
+    color: var(--lxWhite);
+    font-family: 'Montserrat', Verdana, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: all 0.28s ease;
+    outline: none;
 }
 
-form input[type="checkbox"] {
+.content form input[type="text"]::placeholder,
+.content form input[type="tel"]::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.content form input[type="text"]:focus,
+.content form input[type="tel"]:focus {
+    border-color: var(--lxGold);
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.15);
+    background: #024555;
+}
+
+/* Checkbox in form */
+.content form input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid rgba(26, 188, 156, 0.4);
+    border-radius: 3px;
+    background: #024555;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.28s ease;
     flex: 0;
 }
 
-input[type="submit"] {
-    margin-top: 30px;
-    padding: 10px;
+.content form input[type="checkbox"]:checked {
+    background: var(--lxGold);
+    border-color: var(--lxGold);
+    box-shadow: 0 0 8px rgba(26, 188, 156, 0.4);
 }
 
-.half {
+.content form input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0d2332;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Submit button */
+.content form input[type="submit"] {
+    margin-top: 1.25rem;
+    padding: 0.95rem;
+    background: var(--lxGold);
+    color: #0d2332;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Montserrat', Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    align-self: stretch;
+}
+
+.content form input[type="submit"]:hover {
+    background: #2fd4b0;
+    box-shadow: 0 0 30px rgba(26, 188, 156, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Centered label (Options heading) */
+.centered {
+    text-align: center;
+    width: 100%;
+    color: rgba(26, 188, 156, 0.7);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0.5rem 0 0.25rem;
+    display: block;
+}
+
+/* Dividers */
+hr.centered,
+hr.half {
+    border: none;
+    border-top: 1px solid rgba(26, 188, 156, 0.12);
+    margin: 0.25rem 0;
+}
+
+hr.half {
     width: 50%;
+    margin-left: 0;
+}
+
+/* Error message in forms */
+h3[style*="color:red"] {
+    color: #f06060 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    margin-bottom: 0.75rem;
 }
