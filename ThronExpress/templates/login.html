@@ -4,12 +4,16 @@
 {% block title %}Sign up{% endblock %}
 {% block extra_head %}{% endblock %}
 {% block contenu0 %}
-<h1 style="color:red; text-align: center;">{{ msg }}</h1>
-<form action="/login/submit" method="POST">
-    <label>LOGIN</label>
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" value="Login">
-</form>
-<a href="/signup">You don't have an account ? Sign up</a>
+<div class="auth-page">
+    {% if msg %}
+    <p class="error-msg">{{ msg }}</p>
+    {% endif %}
+    <form action="/login/submit" method="POST">
+        <label>LOGIN</label>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+    </form>
+    <a href="/signup">You don't have an account ? Sign up</a>
+</div>
 {% endblock %}

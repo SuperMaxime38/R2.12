@@ -22,7 +22,7 @@
     </a>
 </div>
 
-<div> <!-- Map -->
+<div class="map-section"> <!-- Map -->
     <form action="/search" method="POST" class="filters"> <!-- Filters-->
         
         <h3>Filters</h3>
@@ -36,15 +36,23 @@
                 <input type="range" name="price" id="price" min="0" max="10" value="2">
             </div> -->
             <div> <!-- Options (shower, disabled access... see doc)-->
-                <label for="option">Options</label>
-                <label for="hasShower">Shower: </label>
-                <input type="checkbox" name="hasShower" id="option" {% if hasShower %} checked {% endif %}>
-                <label for="hasDisabledAccess">Disabled access: </label>
-                <input type="checkbox" name="hasDisabledAccess" id="option" {% if hasDisabledAccess %} checked {% endif %}>
-                <label for="hasChangingRoom">Baby changing: </label>
-                <input type="checkbox" name="hasChangingRoom" id="option" {% if hasChangingRoom %} checked {% endif %}>
-                <label for="hasLuxury">Luxury: </label>
-                <input type="checkbox" name="hasLuxury" id="option" {% if hasLuxury %} checked {% endif %}>
+                <label>Options</label>
+                <div class="option-row">
+                    <label for="hasShower">Shower</label>
+                    <input type="checkbox" name="hasShower" id="hasShower" {% if hasShower %} checked {% endif %}>
+                </div>
+                <div class="option-row">
+                    <label for="hasDisabledAccess">Disabled access</label>
+                    <input type="checkbox" name="hasDisabledAccess" id="hasDisabledAccess" {% if hasDisabledAccess %} checked {% endif %}>
+                </div>
+                <div class="option-row">
+                    <label for="hasChangingRoom">Baby changing</label>
+                    <input type="checkbox" name="hasChangingRoom" id="hasChangingRoom" {% if hasChangingRoom %} checked {% endif %}>
+                </div>
+                <div class="option-row">
+                    <label for="hasLuxury">Luxury</label>
+                    <input type="checkbox" name="hasLuxury" id="hasLuxury" {% if hasLuxury %} checked {% endif %}>
+                </div>
             </div>
             <input type="submit" value="Search">
         </div>
