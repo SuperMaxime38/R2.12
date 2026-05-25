@@ -161,15 +161,24 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def search():
+    session['nearest'] = False
+    if request.method == 'GET':
+        return redirect(url_for('index', _anchor = 'map'))
     session['filter_distance'] = request.form.get('distance')
     session['filter_shower'] = booleanConvert(request.form.get('hasShower'))
     session['filter_disabled_access'] = booleanConvert(request.form.get('hasDisabledAccess'))
     session['filter_changing_room'] = booleanConvert(request.form.get('hasChangingRoom'))
     session['filter_luxury'] = booleanConvert(request.form.get('hasLuxury'))
 
-    return redirect(url_for('index'))
+    return redirect(url_for('index', _anchor = 'map'))
+
+@app.route('/search/nearest')
+def nearest():
+    session['nearest'] = True
+    
+    return redirect(url_for('index', _anchor = 'map'))
 
 @app.route('/api/markers')
 def get_markers():
@@ -197,7 +206,8 @@ def get_markers():
         "hasShower": hasShower,
         "hasDisabledAccess": hasDisabledAccess,
         "hasChangingRoom": hasChangingRoom,
-        "hasLuxury": hasLuxury
+        "hasLuxury": hasLuxury,
+        "nearest": session['nearest']
     }
 
     return jsonify(data)
