@@ -19,20 +19,37 @@ async function initMap() {
     });
 
     let i = 0;
+
+    let nearestToilet = data["markers"][0];
+    let nearestDist = calc_dist(data["center"][0], data["center"][1], nearestToilet[0], nearestToilet[1]);
+
     while(i < data["markers"].length) {
         marker = data["markers"][i];
+        if(data["nearest"] == true) {
 
-        if(
+            dist = calc_dist(data["center"][0], data["center"][1], marker[0], marker[1]);
+            if(nearestDist > dist) {
+                nearestDist = dist;
+                nearestToilet = marker;
+            }
+
+        } else {
+            if(
             !(data["hasShower"] && !marker[3]) &&
             !(data["hasDisabledAccess"] && !marker[4]) &&
             !(data["hasChangingRoom"] && !marker[5]) &&
             !(data["hasLuxury"] && !marker[6]) &&
-            !(calc_dist(data["center"][0], data["center"][1], marker[0], marker[1]) > data["distance)"])
-        )
-        {
-            var mrk = L.marker([marker[0], marker[1]], {icon: markerIcon}).addTo(map);
+            !(calc_dist(data["center"][0], data["center"][1], marker[0], marker[1]) > data["distance"])
+            )
+            {
+                var mrk = L.marker([marker[0], marker[1]], {icon: markerIcon}).addTo(map);
+            }
         }
         i++;
+    }
+
+    if(data["nearest"] == true) {
+        var mrk = L.marker([nearestToilet[0], nearestToilet[1]], {icon: markerIcon}).addTo(map);
     }
 }
 
