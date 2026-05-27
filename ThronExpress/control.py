@@ -180,6 +180,19 @@ def nearest():
     
     return redirect(url_for('index', _anchor = 'map'))
 
+@app.route('/delete', methods=['POST'])
+def delete():
+    if ('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+
+    if(not session['isHost']):
+        return redirect(url_for('profile'))
+    
+    id = request.form.get('id')
+    deleteBathroom(id)
+
+    return redirect(url_for('my_throns'))
+
 @app.route('/api/markers')
 def get_markers():
 
@@ -198,6 +211,8 @@ def get_markers():
     if 'filter_disabled_access' in session and session['filter_disabled_access']: hasDisabledAccess = True
     if 'filter_changing_room' in session and session['filter_changing_room']: hasChangingRoom = True
     if 'filter_luxury' in session and session['filter_luxury']: hasLuxury = True
+
+    if not 'nearest' in session: session['nearest'] = False
 
     data = {
         "center": [lat, lon],

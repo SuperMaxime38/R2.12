@@ -136,3 +136,12 @@ def addHost(uid, uuid, adresse, lat, lon, hasShower, hasDisabledAccess, hasChang
     cnx.close()
 
     return True
+
+def deleteBathroom(bathroomID):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+
+    cur.execute("DELETE FROM Bathroom WHERE UID = ?", (bathroomID,))
+
+    cnx.commit()
+    cnx.close()

@@ -65,6 +65,10 @@
         <input type="checkbox" name="hasLuxury"> 
     </div>
 
+    {% if session['isHost'] %}
+    <input type="submit" value="Add a bathroom">
+    {% else %}
     <input type="submit" value="Become a host now">
+    {% endif %}
 </form>
 {% endblock %}

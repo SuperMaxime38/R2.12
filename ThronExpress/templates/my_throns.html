@@ -22,6 +22,10 @@
         </ul>
         
     </p>
+    <form action="/delete" method="POST" class="del_thron">
+        <input type="hidden" name="id" value="{{bathroom[0]}}">
+        <input type="submit" value="Delete">
+    </form>
 </section>
 {% endfor %}
 <a href="/thron/new">Add a new bathroom</a>
