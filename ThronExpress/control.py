@@ -15,7 +15,10 @@ def index():
     hasLuxury = False
     distance = 2000
 
-    if 'filter_distance' in session: distance = session['filter_distance']
+    if 'filter_distance' in session:
+        distance = session['filter_distance']
+    else:
+        session['filter_distance'] = distance
     if 'filter_shower' in session and session['filter_shower']: hasShower = True
     if 'filter_disabled_access' in session and session['filter_disabled_access']: hasDisabledAccess = True
     if 'filter_changing_room' in session and session['filter_changing_room']: hasChangingRoom = True

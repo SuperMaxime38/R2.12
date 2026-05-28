@@ -64,6 +64,10 @@
     font-weight: 800;
     margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
+    
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .content h2 {
@@ -76,6 +80,10 @@
     border-bottom: 1px solid rgba(26, 188, 156, 0.2);
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .content h3 {
@@ -112,6 +120,8 @@
     margin-bottom: 1rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -152,7 +162,7 @@
 }
 
 /* "Add bathroom" link */
-.content > a {
+.content a {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -171,7 +181,7 @@
     box-shadow: 0 0 24px rgba(26, 188, 156, 0.18);
 }
 
-.content > a:hover {
+.content a:hover {
     background: #2fd4b0;
     box-shadow: 0 0 40px rgba(26, 188, 156, 0.35);
     transform: translateY(-2px);
@@ -190,7 +200,7 @@
     border-radius: 8px;
     padding: 2rem 1.75rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-    margin-top: 1rem;
+    margin: 1rem auto 0 auto;
 }
 
 .content form div {
@@ -253,7 +263,6 @@
     cursor: pointer;
     position: relative;
     transition: all 0.28s ease;
-    flex: 0;
 }
 
 .content form input[type="checkbox"]:checked {
@@ -315,12 +324,11 @@
 hr.centered,
 hr.half {
     border: none;
-    border-top: 1px solid rgba(26, 188, 156, 0.12);
     margin: 0.25rem 0;
 }
 
 hr.half {
-    width: 50%;
+    width: 100%;
     margin-left: 0;
 }
 
