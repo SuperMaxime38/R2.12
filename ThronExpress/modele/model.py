@@ -45,7 +45,7 @@ def addUser(uuid, username, name, phone, passwrd):
 def getUser(uuid):
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
-    cur.execute("SELECT * FROM User WHERE UUID = ?", (uuid,))
+    cur.execute("SELECT * FROM User WHERE UUID = ?", (str(uuid),))
     rows = cur.fetchall()
     cnx.close()
     return rows[0] # retourne UN tuple (sinon renvoie une liste de 1 tuple donc c'est useless)
@@ -142,6 +142,16 @@ def deleteBathroom(bathroomID):
     cur = cnx.cursor()
 
     cur.execute("DELETE FROM Bathroom WHERE UID = ?", (bathroomID,))
+
+    cnx.commit()
+    cnx.close()
+
+def deleteAccount(uuid):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+
+    cur.execute("DELETE FROM Bathroom WHERE OwnerID = ?", (uuid,))
+    cur.execute("DELETE FROM User WHERE UUID = ?", (uuid,))
 
     cnx.commit()
     cnx.close()

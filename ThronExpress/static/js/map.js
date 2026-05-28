@@ -69,4 +69,11 @@ async function calc_dist(lat1, lon1, lat2, lon2) {
 
 }
 
+const value = document.querySelector("#distance-label");
+const input = document.querySelector("#distance");
+value.textContent = "Distance (" + input.value + "m)";
+input.addEventListener("input", (event) => {
+  value.textContent = "Distance (" + event.target.value + "m)";
+});
+
 initMap();

@@ -1,5 +1,30 @@
 {% extends "profile_base.html" %}
 
 {% block contenu1 %}
-<p> Coming soon</p>
+<section>
+    <h2>Personal information</h2>
+    <p>Username: {{ user[1] }}</p>
+    <p>Name: {{ user[2] }}</p>
+    <p>Phone: {{ user[3] }}</p>
+</section>
+<section>
+    <h2>Danger Zone</h2>
+    {% if msg %}
+    <p class="error-msg">{{ msg }}</p>
+    {% endif %}
+    <form action="/change/password" method="POST">
+        <h3>Change password</h3>
+        <input type="password" name="old_password" placeholder="Old password" required>
+        <input type="password" name="new_password" placeholder="New password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm password" required>
+        <input type="submit" value="Change password">
+    </form>
+    {% if user[6] != None %}
+    <a href="/bank">Change your bank information</a>
+    {% else %}
+        <a href="/bank">Bind your bank account</a>
+    {% endif %}
+    <a href ="/delete/account">Delete account (This action is irreversible)</a>
+
+</section>
 {% endblock %}

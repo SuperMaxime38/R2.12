@@ -28,7 +28,7 @@
         <h3>Filters</h3>
         <div>
             <div> <!--Distance-->
-                <label for="distance">Distance</label>
+                <label for="distance" id="distance-label">Distance ({{distance}}m)</label>
                 <input type="range" name="distance" id="distance" min="1" max="50000" {% if distance %} value="{{distance}}" {% else %} value="1000" {% endif %}>
             </div>
             <!-- <div>  NOTE: Ce sont des abonnements peut-on vraiment filtrer par prix ?

@@ -13,7 +13,7 @@ def index():
     hasDisabledAccess = False
     hasChangingRoom = False
     hasLuxury = False
-    distance = 50000
+    distance = 2000
 
     if 'filter_distance' in session: distance = session['filter_distance']
     if 'filter_shower' in session and session['filter_shower']: hasShower = True
@@ -39,7 +39,6 @@ def login_submit():
         session['ID'] = user[0][0]
         session['name'] = request.form['username']
         session['isHost'] = user[0][5]
-        print(session['isHost'])
 
         return redirect(url_for('index'))
     
@@ -69,8 +68,11 @@ def signup_submit():
 def profile():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    user = getUser(str(session['ID']))
+    print(user)
 
-    return render_template('profile.html', selected = 'profile')
+    return render_template('profile.html', selected = 'profile', user = user)
 
 @app.route('/become/a/host')
 def become_a_host():
@@ -80,19 +82,31 @@ def become_a_host():
     if(session['isHost'] or get_bank_id(session['ID']) != None):
         return redirect(url_for('new_thron'))
     
-    return render_template('bank.html')
+    return render_template('bank.html', hasBank = False)
+
+@app.route('/bank')
+def bank():
+    if('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+    
+    updateBank = False
+    if(session['isHost'] or get_bank_id(session['ID']) != None):
+        updateBank = True
+
+    return render_template('bank.html', hasBank = updateBank)
 
 @app.route('/bank/submit', methods=['POST'])
 def bank_submit():
     if('ID' not in session):
         return redirect(url_for('login', msg = "You need to be logged in"))
     
-    if(session['isHost'] or get_bank_id(session['ID']) != []):
+    if(session['isHost'] or get_bank_id(session['ID']) != None):
         return redirect(url_for('new_thron'))
     
     card_number = request.form.get('card_number')
     expiration_date = request.form.get('expiration_date')
     cvv = request.form.get('cvv')
+
 
     add_bank_id(session['ID'], card_number, expiration_date, cvv)
 
@@ -193,6 +207,16 @@ def delete():
 
     return redirect(url_for('my_throns'))
 
+@app.route('/delete/account')
+def delete_account():
+    if ('ID' not in session):
+        return redirect(url_for('login', msg = "You need to be logged in"))
+
+    
+    deleteAccount(session['ID'])
+
+    return redirect(url_for('index'))
+
 @app.route('/api/markers')
 def get_markers():
 
@@ -263,7 +287,6 @@ def getCoords(street, city, zipcode, country):
     if(len(data) == 0):
         return None
 
-    print(data)
     return data[0]["lat"], data[0]["lon"]
 
 def booleanConvert(value):
