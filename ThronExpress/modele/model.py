@@ -102,9 +102,6 @@ def changePassword(uuid, passwrd):
     password = hashlib.sha256()
     password.update(bytes(passwrd, 'utf-8'))
 
-    print("old psswrd: ", password.hexdigest())
-    print("uid: ", uuid)
-
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
     cur.execute("UPDATE User SET password = ? WHERE UUID = ?", (password.hexdigest(), uuid))

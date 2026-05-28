@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Subscription{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/TE_subscription.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+{% block contenu0 %}
+
+<main class="subscription-page">
+        
+        <h1 class="page-title">Payment Options & Earnings</h1>
+
+        <div class="pricing-container">
+            
+            <div class="pricing-card card-teal">
+                <div class="card-header">
+                    <div class="card-number">1</div>
+                </div>
+                <div class="card-body">
+                    <h3>Pay-as-you-go</h3>
+                    <ul>
+                        <li>Single session at a fixed rate</li>
+                        <li>Between €2 (Standard) and €10 (Premium/Luxury)</li>
+                        <li>"Flush-Premium" bonus: top-rated hosts can increase their rates</li>
+                    </ul>
+                    <a href="/subscribtions" class="btn">Subscribe now</a>
+                </div>
+            </div>
+
+            <div class="pricing-card card-purple">
+                <div class="card-header">
+                    <div class="card-number">2</div>
+                </div>
+                <div class="card-body">
+                    <h3>The Subscription</h3>
+                    <ul>
+                        <li>Unlimited monthly pass</li>
+                        <li>Access to lounges of a certain category</li>
+                    </ul>
+                    <a href="/subscribtions" class="btn">Subscribe now</a>
+                </div>
+            </div>
+
+            <div class="pricing-card card-teal">
+                <div class="card-header">
+                    <div class="card-number">3</div>
+                </div>
+                <div class="card-body">
+                    <h3>Business Offer</h3>
+                    <ul>
+                        <li>Business package (Deliveroo, Uber, construction, etc.)</li>
+                        <li>Free access to the ThronExpress network for all employees</li>
+                    </ul>
+                    <a href="/subscribtions" class="btn">Subscribe now</a>s
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}

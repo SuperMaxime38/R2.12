@@ -73,7 +73,6 @@ def profile():
         return redirect(url_for('login', msg = "You need to be logged in"))
     
     user = getUser(str(session['ID']))
-    print(user)
 
     return render_template('profile.html', selected = 'profile', user = user)
 
@@ -170,8 +169,7 @@ def about():
 
 @app.route('/subscribtions')
 def subscribtions():
-    # TODO
-    return render_template('index.html')
+    return render_template('TE_subscription.html')
 
 @app.route('/logout')
 def logout():
