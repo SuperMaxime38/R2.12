@@ -182,7 +182,7 @@
 }
 
 .content a:hover {
-    background: #2fd4b0;
+    background: var(--color-accent-light);
     box-shadow: 0 0 40px rgba(26, 188, 156, 0.35);
     transform: translateY(-2px);
 }
@@ -225,7 +225,8 @@
 }
 
 .content form input[type="text"],
-.content form input[type="tel"] {
+.content form input[type="tel"],
+.content form input[type="password"] {
     flex: 1;
     padding: 0.65rem 0.85rem;
     background: #025060;
@@ -237,6 +238,9 @@
     font-weight: 400;
     transition: all 0.28s ease;
     outline: none;
+}
+.content form input[type="password"] {
+    margin:5px;
 }
 
 .content form input[type="text"]::placeholder,
@@ -302,7 +306,7 @@
 }
 
 .content form input[type="submit"]:hover {
-    background: #2fd4b0;
+    background: var(--color-accent-light);
     box-shadow: 0 0 30px rgba(26, 188, 156, 0.3);
     transform: translateY(-1px);
 }
