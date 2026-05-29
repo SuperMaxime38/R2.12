@@ -218,6 +218,29 @@ def delete_account():
 
     return redirect(url_for('index'))
 
+@app.route('/change/password', methods= ['POST'])
+def change_password():
+    if 'ID' not in session:
+        return redirect(url_for('index'))
+
+    old = request.form.get('old_password')
+    new = request.form.get('new_password')
+    confirm = request.form.get('confirm_password')
+
+    true_old = getPassword(session['ID'])
+
+    password = hashlib.sha256()
+    password.update(bytes(old, 'utf-8'))
+
+    if true_old != password.hexdigest:
+        return redirect(url_for('profile', msg = "Wrong password"))
+    
+    if new != confirm:
+        return redirect(url_for('profile', msg = "Your new password must be the same"))
+    
+    changePassword(session['ID'], new)
+
+
 @app.route('/api/markers')
 def get_markers():
 

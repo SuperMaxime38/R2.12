@@ -104,9 +104,20 @@ def changePassword(uuid, passwrd):
 
     cnx = ouvrir_connexion()
     cur = cnx.cursor()
-    cur.execute("UPDATE User SET password = ? WHERE UUID = ?", (password.hexdigest(), uuid))
+    cur.execute("UPDATE User SET password = ? WHERE UUID = ?", (password.hexdigest(), str(uuid)))
     cnx.commit()
     cnx.close()
+
+def getPassword(uuid):
+    cnx = ouvrir_connexion()
+    cur = cnx.cursor()
+    cur.execute("SELECT password FROM User WHERE UUID = ?", (str(uuid),))
+    cnx.commit()
+
+    rows = cur.fetchall()
+    cnx.close()
+    
+    return rows[0][0]
 
 def doesBathroomExists(adresse):
     cnx = ouvrir_connexion()
