@@ -182,7 +182,7 @@
 }
 
 .content a:hover {
-    background: var(--color-accent-light);
+    background: #2fd4b0;
     box-shadow: 0 0 40px rgba(26, 188, 156, 0.35);
     transform: translateY(-2px);
 }
@@ -225,8 +225,7 @@
 }
 
 .content form input[type="text"],
-.content form input[type="tel"],
-.content form input[type="password"] {
+.content form input[type="tel"] {
     flex: 1;
     padding: 0.65rem 0.85rem;
     background: #025060;
@@ -238,9 +237,6 @@
     font-weight: 400;
     transition: all 0.28s ease;
     outline: none;
-}
-.content form input[type="password"] {
-    margin:5px;
 }
 
 .content form input[type="text"]::placeholder,
@@ -306,7 +302,7 @@
 }
 
 .content form input[type="submit"]:hover {
-    background: var(--color-accent-light);
+    background: #2fd4b0;
     box-shadow: 0 0 30px rgba(26, 188, 156, 0.3);
     transform: translateY(-1px);
 }
@@ -344,4 +340,135 @@ h3[style*="color:red"] {
     font-weight: 500 !important;
     text-align: center !important;
     margin-bottom: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   PERSONAL INFORMATION CARD
+   -------------------------------------------------------------------------- */
+.info-card {
+    padding: 0.5rem 2rem 1rem !important;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(26, 188, 156, 0.1);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', Verdana, sans-serif;
+}
+
+.info-value {
+    color: var(--lxWhite);
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-family: 'Montserrat', Verdana, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   DANGER ZONE SECTION
+   -------------------------------------------------------------------------- */
+.danger-zone {
+    border-left: 3px solid rgba(231, 76, 60, 0.5) !important;
+    padding: 0.5rem 2rem 1.5rem !important;
+}
+
+.danger-zone h2 {
+    color: rgba(231, 76, 60, 0.8) !important;
+    border-bottom-color: rgba(231, 76, 60, 0.18) !important;
+}
+
+/* Password inputs */
+.content form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    background: #025060;
+    border: 1px solid rgba(26, 188, 156, 0.18);
+    border-radius: 4px;
+    color: var(--lxWhite);
+    font-family: 'Montserrat', Verdana, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: all 0.28s ease;
+    outline: none;
+    margin-bottom: 0.65rem;
+    box-sizing: border-box;
+}
+
+.content form input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.content form input[type="password"]:focus {
+    border-color: var(--lxGold);
+    box-shadow: 0 0 0 2px rgba(26, 188, 156, 0.15);
+    background: #024555;
+}
+
+/* Error message banner */
+.error-msg {
+    color: #f06060 !important;
+    font-size: 0.82rem !important;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.28);
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    max-width: 420px;
+    margin: 0 auto 1rem auto !important;
+}
+
+/* Danger action buttons row */
+.danger-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.danger-actions a {
+    margin-top: 0 !important;
+}
+
+/* Bank button — outlined/secondary */
+.content .bank-btn {
+    background: transparent;
+    color: var(--lxGold);
+    border: 1px solid var(--lxGold);
+    box-shadow: none;
+}
+
+.content .bank-btn:hover {
+    background: rgba(26, 188, 156, 0.1);
+    box-shadow: 0 0 20px rgba(26, 188, 156, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Delete button — danger/red */
+.content .delete-btn {
+    background: rgba(231, 76, 60, 0.12);
+    color: #f06060;
+    border: 1px solid rgba(231, 76, 60, 0.38);
+    box-shadow: none;
+}
+
+.content .delete-btn:hover {
+    background: rgba(231, 76, 60, 0.25);
+    color: #ff8080;
+    border-color: rgba(231, 76, 60, 0.65);
+    box-shadow: 0 0 24px rgba(231, 76, 60, 0.2);
+    transform: translateY(-2px);
 }

@@ -14,9 +14,9 @@
     --color-elevated:    #024555;
     --color-muted:       #025060;
 
-    --color-accent:       #c6a800;
-    --color-accent-light: #ddbc02;
-    --color-accent-dark:  #998200;
+    --color-accent:       #1abc9c;
+    --color-accent-light: #2fd4b0;
+    --color-accent-dark:  #0e9c83;
     --color-accent-dim:   rgba(26, 188, 156, 0.12);
     --color-accent-glow:  rgba(26, 188, 156, 0.22);
 
@@ -46,7 +46,7 @@
     /* Legacy vars kept for profile.css */
     --lxGray:        #013d4a;
     --lxLighterGray: #024555;
-    --lxGold:        #c6a800;
+    --lxGold:        #1abc9c;
     --lxWhite:       #ffffff;
     --lxNacre:       #e8f5f3;
 }
